@@ -1,14 +1,18 @@
 name: pytest
-on: 
+on:
   push:
     branches:
       - main
+    paths:
+      - "*.py"
   pull_request:
-    branches: 
+    branches:
       - main
+    paths:
+      - "*.py"
 
 jobs:
-  pytest:
+  CI:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -16,18 +20,29 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Setup Python {{ matrix.python-version}}
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
+
       - name: Install Poetry
         run: |
           curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
           echo "$HOME/.poetry/bin" >> $GITHUB_PATH
+
       - name: Install Dependencies
         run: poetry install -n
+
+      - name: Run Black format check
+        run: black src tests --check --diff --verbose
+
+      - name: Run flake8 lint check
+        run: flake8 src tests --max-line-length=88 --ignore=E203,W503,W504
+
       - name: Run pytest
-        run: poetry run pytest tests --cov=src --cov-report=xml
+        run: poetry run pytest tests --tb=line --cov=src --cov-report=xml --cov-report=term
+
       - name: Upload coverage to Codecov
         if: ${{ matrix.python-version==3.8 }}
         uses: codecov/codecov-action@v2
