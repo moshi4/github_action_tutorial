@@ -13,5 +13,5 @@ poetry shell
 # Run pytest
 pytest
 # Run pytest with coverage
-pytest --cov --cov-report xml
+pytest --cov --cov-report=xml
 ```
