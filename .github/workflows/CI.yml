@@ -29,10 +29,10 @@ jobs:
         run: poetry install -n
 
       - name: Run Black format check
-        run: black src tests --check --diff --verbose
+        run: poetry run black src tests --check --diff --verbose
 
       - name: Run flake8 lint check
-        run: flake8 src tests --max-line-length=88 --ignore=E203,W503,W504
+        run: poetry run flake8 src tests --max-line-length=88 --ignore=E203,W503,W504
 
       - name: Run pytest
         run: poetry run pytest tests --tb=line --cov=src --cov-report=xml --cov-report=term
