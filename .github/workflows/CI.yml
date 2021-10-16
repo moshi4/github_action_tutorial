@@ -1,10 +1,11 @@
-name: pytest
+name: CI
 on:
   push:
     branches:
       - main
     paths:
       - "*.py"
+      - "*.yml"
   pull_request:
     branches:
       - main
