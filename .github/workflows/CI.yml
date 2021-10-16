@@ -1,16 +1,9 @@
 name: CI
 on:
   push:
-    branches:
-      - main
-    paths:
-      - "*.py"
-      - "*.yml"
+    branches: main
   pull_request:
-    branches:
-      - main
-    paths:
-      - "*.py"
+    branches: main
 
 jobs:
   CI:
