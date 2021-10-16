@@ -1,20 +1,23 @@
-import pytest
 from pytestdemo.calc import add, divide, multiply, sub
 
 
 def test_add():
-    assert add(6, 3) == 10
+    """test add"""
+    assert add(6, 3) == 9
 
 
 def test_sub():
+    """test sub"""
     assert sub(6, 3) == 3
 
 
 def test_multiply():
+    """test multiply"""
     assert multiply(6, 3) == 18
 
 
 def test_divide_ok():
+    """test divide ok"""
     assert divide(6, 3) == 2
 
 
