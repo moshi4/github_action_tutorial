@@ -30,12 +30,12 @@ jobs:
           channel-priority: true
 
       - name: Install requirements on MacOS
-        shell: bash
+        shell: bash -l {0}
         run: |
           mamba install circos=0.69.8
 
       - name: Check Circos installation
-        shell: bash
+        shell: bash -l {0}
         run: |
           circos -modules
           circos -h
