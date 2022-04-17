@@ -32,7 +32,7 @@ jobs:
       - name: Install requirements on MacOS
         shell: bash -l {0}
         run: |
-          mamba install circos=0.69.8
+          mamba install circos
 
       - name: Check Circos installation
         shell: bash -l {0}
