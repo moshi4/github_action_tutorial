@@ -11,10 +11,13 @@ on:
 jobs:
   CI_black-flake8-pytest:
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash -l {0}
     strategy:
       matrix:
-        # os: [ubuntu-latest, macos-latest]
-        os: [macos-latest]
+        os: [ubuntu-latest, macos-latest]
+        # os: [macos-latest]
         python-version: [3.8, 3.9]
     steps:
       - name: Checkout
@@ -25,17 +28,14 @@ jobs:
         uses: conda-incubator/setup-miniconda@v2
         with:
           python-version: ${{ matrix.python-version }}
-          mamba-version: "*"
           channels: conda-forge,bioconda,defaults
           channel-priority: true
 
       - name: Install requirements on MacOS
-        shell: bash -l {0}
         run: |
           conda install circos
 
       - name: Check Circos installation
-        shell: bash -l {0}
         run: |
           circos -modules
           circos -h
